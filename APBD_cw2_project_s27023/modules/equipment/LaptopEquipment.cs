@@ -4,11 +4,10 @@ namespace APBD_cw2_project_s27023.modules.equipment;
 
 public class LaptopEquipment(
     long id,
-    string name,
     bool isRented,
     float screenSizeInches,
     float batteryWattHours)
-    : Equipment(id, name, isRented)
+    : Equipment(id, "LAP-" + id, isRented)
 {
     public override PowerSource PowerSource => PowerSource.MIXED;
     public override EquipmentType Type => EquipmentType.LAPTOP;
