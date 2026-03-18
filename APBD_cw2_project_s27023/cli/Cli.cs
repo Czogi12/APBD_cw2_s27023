@@ -13,7 +13,7 @@ public static class Cli
             var words = line.Split(' ');
             if (words.Length < 1) continue;
             var command = words[0];
-            var args = words.Skip(1).ToArray();
+            var args = words.Length > 1 ? words.Skip(1).ToArray() : [];
 
             switch (command)
             {
