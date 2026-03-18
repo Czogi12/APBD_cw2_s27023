@@ -37,7 +37,7 @@ public static class Cli
         var firstName = args[1];
         var lastName = args[2];
 
-        var user = UserFactory.CreateUser(firstName, lastName, type);
+        var user = UserFactory.CreateUser(type, firstName, lastName);
 
         if (user is null)
         {
