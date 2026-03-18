@@ -1,6 +1,8 @@
-namespace APBD_cw2_project_s27023.enums;
+﻿namespace APBD_cw2_project_s27023.enums;
 
 public enum EquipmentType
 {
-    LAPTOP, PROJECTOR, CAMERA, MICROPHONE
+    LAPTOP,
+    LASER_POINTER,
+    PROJECTOR
 }
