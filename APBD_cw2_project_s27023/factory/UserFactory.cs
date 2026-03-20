@@ -10,7 +10,7 @@ public class UserFactory
         // Source - https://stackoverflow.com/a/21561708
         // Posted by Paweł Bejger
         // Retrieved 2026-03-20, License - CC BY-SA 3.0
-        UserType? userType = (UserType)Enum.Parse(typeof(UserType), type);
+        UserType? userType = Enum.Parse<UserType>(type, true);
 
         return userType switch
         {
