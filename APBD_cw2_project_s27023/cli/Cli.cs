@@ -1,29 +1,61 @@
-﻿using APBD_cw2_project_s27023.factory;
+﻿using APBD_cw2_project_s27023.cli.commands;
+using APBD_cw2_project_s27023.factory;
 using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli;
 
-public static class Cli
+public class Cli
 {
-    public static void Main(string[] _)
+    public Cli()
     {
-        string line;
+        InitiateCommands();
+        InitiateScanner();
+    }
+
+    private List<Command> Commands { get; } = [];
+
+    private void InitiateCommands()
+    {
+        Commands.Add(new AddUserCommand());
+    }
+
+    private void InitiateScanner()
+    {
+        string? line;
         while ((line = Console.ReadLine()) != null)
         {
             var words = line.Split(' ');
             if (words.Length < 1) continue;
-            var command = words[0];
-            var args = words.Skip(1).ToArray();
+            var commandText = words[0];
+            var args = words.Length > 1 ? words.Skip(1).ToArray() : [];
 
-            switch (command)
+            foreach (var command in Commands)
             {
-                case "au":
-                case "add_user":
-                    AddUser(args);
-                    break;
+                if (!command.CommandMatches(commandText)) continue;
+                command.Execute(args);
             }
         }
     }
+
+    // public static void Main(string[] _)
+    // {
+    //     string line;
+    //     while ((line = Console.ReadLine()) != null)
+    //     {
+    //         var words = line.Split(' ');
+    //         if (words.Length < 1) continue;
+    //         var command = words[0];
+    //         var args = words.Skip(1).ToArray();
+    //
+    //         switch (command)
+    //         {
+    //             case "au":
+    //             case "add_user":
+    //                 AddUser(args);
+    //                 break;
+    //         }
+    //     }
+    // }
 
     public static void AddUser(string[] args)
     {
