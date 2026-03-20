@@ -42,7 +42,7 @@ public abstract class Command(string[] variants, ICommandArgument[] arguments, s
         Console.Write($"Usage: {CommandName}");
         if (Arguments.Length > 0)
             Console.Write(
-                $" {string.Join(" ", Arguments.Select(argument => $"{(argument.Required ? '<' : '[')}{argument.Name}{(argument.Required ? '>' : ']')}"))}");
+                $" {string.Join(" ", Arguments.Select(argument => argument.ToString()))}");
         Console.WriteLine();
     }
 

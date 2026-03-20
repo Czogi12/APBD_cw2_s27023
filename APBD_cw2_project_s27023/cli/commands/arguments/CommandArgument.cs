@@ -13,4 +13,9 @@ public abstract class CommandArgument<T>(string name, bool required) : ICommandA
     }
 
     protected abstract T ParseTyped(string arg);
+
+    public override string ToString()
+    {
+        return $"{(Required ? '<' : '[')}{Name}{(Required ? '>' : ']')}";
+    }
 }
