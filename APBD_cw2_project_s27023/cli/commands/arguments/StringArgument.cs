@@ -17,4 +17,9 @@ public class StringArgument(string name, bool required, string? regexpPattern) :
     {
         return arg;
     }
+
+    protected override string StringifiedType()
+    {
+        return "string";
+    }
 }

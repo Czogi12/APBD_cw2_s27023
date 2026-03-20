@@ -20,4 +20,9 @@ public class FloatArgument(string name, bool required) : CommandArgument<float>(
     {
         return int.Parse(arg);
     }
+
+    protected override string StringifiedType()
+    {
+        return "float";
+    }
 }

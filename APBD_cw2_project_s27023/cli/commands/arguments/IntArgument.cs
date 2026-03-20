@@ -26,4 +26,9 @@ public class IntArgument(string name, bool required, int? min, int? max) : Comma
     {
         return int.Parse(arg);
     }
+
+    protected override string StringifiedType()
+    {
+        return "int";
+    }
 }

@@ -16,6 +16,8 @@ public abstract class CommandArgument<T>(string name, bool required) : ICommandA
 
     public override string ToString()
     {
-        return $"{(Required ? '<' : '[')}{Name}{(Required ? '>' : ']')}";
+        return $"{(Required ? '<' : '[')}{Name}:{StringifiedType()}{(Required ? '>' : ']')}";
     }
+
+    protected abstract string StringifiedType();
 }
