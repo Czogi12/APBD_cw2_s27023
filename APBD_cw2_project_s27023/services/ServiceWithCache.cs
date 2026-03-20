@@ -2,7 +2,7 @@
 
 public abstract class ServiceWithCache<T, TE> : IService<T, TE>
 {
-    private Dictionary<T, TE> Cache { get; }
+    private Dictionary<T, TE> Cache { get; } = new();
 
     public TE? Get(T id)
     {
