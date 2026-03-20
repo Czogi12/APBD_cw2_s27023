@@ -7,7 +7,7 @@ public class RemoveUserCommand() : Command(["remove-user", "ru"],
     [
         new IntArgument("id", true, null, null)
     ],
-    "Adds new user with given FirstName and LastName.")
+    "Removes user with given id.")
 {
     protected override void ExecuteCommand(string[] args)
     {
