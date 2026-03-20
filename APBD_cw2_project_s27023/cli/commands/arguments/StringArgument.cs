@@ -26,6 +26,6 @@ public class StringArgument(string name, bool required, string? regexpPattern) :
     public override string ToString()
     {
         return
-            $"{(Required ? '<' : '[')}{Name}:{StringifiedType()}{(regexpPattern is not null ? $"\\{{{RegexPattern}\\}}" : "")}{(Required ? '>' : ']')}";
+            $"{(Required ? '<' : '[')}{Name}:{StringifiedType()}{(regexpPattern is not null ? $"@{RegexPattern}" : "")}{(Required ? '>' : ']')}";
     }
 }
