@@ -1,5 +1,8 @@
-﻿using APBD_cw2_project_s27023.cli.commands.arguments;
+﻿using System.Drawing;
+using APBD_cw2_project_s27023.cli.commands.arguments;
 using APBD_cw2_project_s27023.enums;
+using APBD_cw2_project_s27023.modules.equipment;
+using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
@@ -49,15 +52,22 @@ public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
             } while (!fulfilled);
         }
 
-        // TODO: finish when EquipmentService is ready
         switch (equipmentType)
         {
             case EquipmentType.Laptop:
-
+                EquipmentService.Instance.Add(new LaptopEquipment(Equipment.GetNextId(),
+                    float.Parse(dataArgs[0]), float.Parse(dataArgs[1])));
                 break;
             case EquipmentType.LaserPointer:
+                var color = Color.FromArgb(int.Parse(dataArgs[0]), int.Parse(dataArgs[1]), int.Parse(dataArgs[2]));
+                EquipmentService.Instance.Add(new LaserPointerEquipment(Equipment.GetNextId(), color,
+                    float.Parse(dataArgs[3])
+                ));
                 break;
             case EquipmentType.Projector:
+                EquipmentService.Instance.Add(new ProjectorEquipment(Equipment.GetNextId(),
+                    int.Parse(dataArgs[0]), float.Parse(dataArgs[1])
+                ));
                 break;
             default:
                 throw new NotImplementedException($"EquipmentType {args[0]} creation not implemented!");
