@@ -1,6 +1,6 @@
 ﻿namespace APBD_cw2_project_s27023.cli.commands.arguments;
 
-public class IntCommand(string name, bool required, int? min, int? max) : CommandArgument<int>(name, required)
+public class IntArgument(string name, bool required, int? min, int? max) : CommandArgument<int>(name, required)
 {
     private int Min => min ?? int.MinValue;
     private int Max => max ?? int.MaxValue;
