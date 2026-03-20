@@ -16,6 +16,8 @@ public class AddUserCommand() : Command(["add-user", "au"],
 {
     protected override void ExecuteCommand(string[] args)
     {
-        UserService.Instance.Add(UserFactory.CreateUser(args[0], args[1], args[2])!);
+        var user = UserFactory.CreateUser(args[0], args[1], args[2])!;
+        UserService.Instance.Add(user);
+        Console.WriteLine($"Successfully added user: {user}");
     }
 }

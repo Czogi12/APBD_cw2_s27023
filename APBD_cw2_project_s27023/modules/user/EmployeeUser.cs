@@ -10,4 +10,9 @@ public class EmployeeUser(long id, string firstName, string lastName) : User(id,
     {
         return 5;
     }
+
+    public override string ToString()
+    {
+        return $"Employee[id={Id}, firstName={FirstName}, lastName={LastName}]";
+    }
 }
