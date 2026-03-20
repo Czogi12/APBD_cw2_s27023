@@ -53,26 +53,31 @@ public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
             } while (!fulfilled);
         }
 
+        var id = Equipment.GetNextId();
+
         switch (equipmentType)
         {
             case EquipmentType.Laptop:
-                EquipmentService.Instance.Add(new LaptopEquipment(Equipment.GetNextId(),
+                EquipmentService.Instance.Add(new LaptopEquipment(id,
                     float.Parse(dataArgs[0], CultureInfo.InvariantCulture),
                     float.Parse(dataArgs[1], CultureInfo.InvariantCulture)));
                 break;
             case EquipmentType.LaserPointer:
                 var color = Color.FromArgb(int.Parse(dataArgs[0]), int.Parse(dataArgs[1]), int.Parse(dataArgs[2]));
-                EquipmentService.Instance.Add(new LaserPointerEquipment(Equipment.GetNextId(), color,
+                EquipmentService.Instance.Add(new LaserPointerEquipment(id, color,
                     float.Parse(dataArgs[3], CultureInfo.InvariantCulture)
                 ));
                 break;
             case EquipmentType.Projector:
-                EquipmentService.Instance.Add(new ProjectorEquipment(Equipment.GetNextId(),
+                EquipmentService.Instance.Add(new ProjectorEquipment(id,
                     int.Parse(dataArgs[0]), float.Parse(dataArgs[1], CultureInfo.InvariantCulture)
                 ));
                 break;
             default:
                 throw new NotImplementedException($"EquipmentType {args[0]} creation not implemented!");
         }
+
+        var obj = EquipmentService.Instance.Get(id);
+        Console.WriteLine($"Successfully added {obj}");
     }
 }
