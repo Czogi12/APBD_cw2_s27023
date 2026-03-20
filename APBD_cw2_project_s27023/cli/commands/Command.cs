@@ -51,7 +51,7 @@ public abstract class Command(string[] variants, ICommandArgument[] arguments, s
         Console.WriteLine($"{CommandName} - {HelpText}");
     }
 
-    private void Print()
+    public void Print()
     {
         PrintHelp();
         PrintUsage();
