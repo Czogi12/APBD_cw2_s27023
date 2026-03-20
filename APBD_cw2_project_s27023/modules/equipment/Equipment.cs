@@ -4,7 +4,7 @@ namespace APBD_cw2_project_s27023.modules.equipment;
 
 public abstract class Equipment : Identifiable
 {
-    private static long _maxId = 1;
+    private static long _maxId;
 
     protected Equipment(long id, string name) : base(id)
     {
