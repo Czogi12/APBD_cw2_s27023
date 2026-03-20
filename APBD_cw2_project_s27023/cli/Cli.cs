@@ -14,10 +14,13 @@ public class Cli
 
     private void InitiateCommands()
     {
-        Commands.Add(new HelpCommand(this));
+        var help = new HelpCommand(this);
+        Commands.Add(help);
         Commands.Add(new ClearCommand());
         Commands.Add(new AddUserCommand());
         Commands.Add(new AddEquipmentCommand());
+
+        help.Execute([]);
     }
 
     private void InitiateScanner()
