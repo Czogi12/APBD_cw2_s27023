@@ -2,9 +2,9 @@
 
 namespace APBD_cw2_project_s27023.services;
 
-public class UserServiceWithCache : ServiceWithCache<long, User>
+public class UserService : ServiceWithCache<long, User>
 {
-    public static UserServiceWithCache Instance { get; } = new();
+    public static UserService Instance { get; } = new();
 
     public void Add(User user)
     {
