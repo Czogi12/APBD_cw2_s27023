@@ -10,4 +10,10 @@ public class ProjectorEquipment(long id, int lumenBrightness, float throwDistanc
 
     public int LumenBrightness { get; } = lumenBrightness;
     public float ThrowDistanceMeters { get; } = throwDistanceMeters;
+
+    public override string ToString()
+    {
+        return
+            $"Projector[id={Id}, name=\"{Name}\", limenBrightness={LumenBrightness}, throwDistanceMeters={ThrowDistanceMeters}]";
+    }
 }

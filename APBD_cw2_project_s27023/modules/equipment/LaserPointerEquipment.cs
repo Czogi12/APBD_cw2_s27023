@@ -12,4 +12,9 @@ public class LaserPointerEquipment(long id, Color color, float rangeInMeters)
     public Color Color { get; } = color;
 
     public float RangeInMeters { get; } = rangeInMeters;
+
+    public override string ToString()
+    {
+        return $"LaserPointer[id={Id}, name=\"{Name}\", color={Color}, rangeInMeters={RangeInMeters}]";
+    }
 }

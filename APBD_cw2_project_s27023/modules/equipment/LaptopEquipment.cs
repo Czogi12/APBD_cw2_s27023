@@ -13,4 +13,10 @@ public class LaptopEquipment(
 
     public float ScreenSizeInches { get; } = screenSizeInches;
     public float BatteryWattHours { get; } = batteryWattHours;
+
+    public override string ToString()
+    {
+        return
+            $"Laptop[id={Id}, name=\"{Name}\", screenSizeInches={screenSizeInches}, batteryWattHours={batteryWattHours}]";
+    }
 }
