@@ -1,6 +1,6 @@
 # Uruchamianie
 ```shell
-    dotnet run --project APBD_cw2_project_s27023
+    dotnet run --console --project APBD_cw2_project_s27023
 ```
 # Decyzje
 Inspiracje czerpię z architektury Spring boot.
