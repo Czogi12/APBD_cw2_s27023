@@ -1,4 +1,6 @@
-﻿namespace APBD_cw2_project_s27023.cli.commands.arguments;
+﻿using System.Globalization;
+
+namespace APBD_cw2_project_s27023.cli.commands.arguments;
 
 public class FloatArgument(string name, bool required) : CommandArgument<float>(name, required)
 {
@@ -6,7 +8,7 @@ public class FloatArgument(string name, bool required) : CommandArgument<float>(
     {
         try
         {
-            float.Parse(arg);
+            float.Parse(arg, CultureInfo.InvariantCulture);
         }
         catch (Exception e)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Globalization;
 using APBD_cw2_project_s27023.cli.commands.arguments;
 using APBD_cw2_project_s27023.enums;
 using APBD_cw2_project_s27023.modules.equipment;
@@ -46,7 +47,7 @@ public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
             {
                 Console.Write($"Provide {argument}: ");
                 var line = Console.ReadLine()?.TrimEnd();
-                if (line is null || argument.IsValid(line)) continue;
+                if (line is null || !argument.IsValid(line)) continue;
                 dataArgs.Add(line);
                 fulfilled = true;
             } while (!fulfilled);
@@ -56,17 +57,18 @@ public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
         {
             case EquipmentType.Laptop:
                 EquipmentService.Instance.Add(new LaptopEquipment(Equipment.GetNextId(),
-                    float.Parse(dataArgs[0]), float.Parse(dataArgs[1])));
+                    float.Parse(dataArgs[0], CultureInfo.InvariantCulture),
+                    float.Parse(dataArgs[1], CultureInfo.InvariantCulture)));
                 break;
             case EquipmentType.LaserPointer:
                 var color = Color.FromArgb(int.Parse(dataArgs[0]), int.Parse(dataArgs[1]), int.Parse(dataArgs[2]));
                 EquipmentService.Instance.Add(new LaserPointerEquipment(Equipment.GetNextId(), color,
-                    float.Parse(dataArgs[3])
+                    float.Parse(dataArgs[3], CultureInfo.InvariantCulture)
                 ));
                 break;
             case EquipmentType.Projector:
                 EquipmentService.Instance.Add(new ProjectorEquipment(Equipment.GetNextId(),
-                    int.Parse(dataArgs[0]), float.Parse(dataArgs[1])
+                    int.Parse(dataArgs[0]), float.Parse(dataArgs[1], CultureInfo.InvariantCulture)
                 ));
                 break;
             default:
