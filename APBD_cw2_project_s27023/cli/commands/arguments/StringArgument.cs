@@ -17,4 +17,15 @@ public class StringArgument(string name, bool required, string? regexpPattern) :
     {
         return arg;
     }
+
+    protected override string StringifiedType()
+    {
+        return "string";
+    }
+
+    public override string ToString()
+    {
+        return
+            $"{(Required ? '<' : '[')}{Name}:{StringifiedType()}{(regexpPattern is not null ? $"@{RegexPattern}" : "")}{(Required ? '>' : ']')}";
+    }
 }

@@ -4,13 +4,12 @@ namespace APBD_cw2_project_s27023.modules.equipment;
 
 public abstract class Equipment : Identifiable
 {
-    private static long _maxId = 1;
+    private static long _maxId;
 
-    protected Equipment(long id, string name, bool isRented) : base(id)
+    protected Equipment(long id, string name) : base(id)
     {
         if (_maxId < id) _maxId = id;
         Name = name;
-        IsRented = isRented;
     }
 
     // Required field
@@ -20,8 +19,6 @@ public abstract class Equipment : Identifiable
     public abstract PowerSource PowerSource { get; }
 
     public abstract EquipmentType Type { get; }
-
-    public bool IsRented { get; set; }
 
     public static long GetNextId()
     {

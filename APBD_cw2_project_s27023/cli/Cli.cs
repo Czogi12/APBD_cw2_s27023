@@ -1,6 +1,4 @@
 ﻿using APBD_cw2_project_s27023.cli.commands;
-using APBD_cw2_project_s27023.factory;
-using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli;
 
@@ -16,7 +14,13 @@ public class Cli
 
     private void InitiateCommands()
     {
+        var help = new HelpCommand(this);
+        Commands.Add(help);
+        Commands.Add(new ClearCommand());
         Commands.Add(new AddUserCommand());
+        Commands.Add(new AddEquipmentCommand());
+
+        help.Execute([]);
     }
 
     private void InitiateScanner()
@@ -29,56 +33,26 @@ public class Cli
             var commandText = words[0];
             var args = words.Length > 1 ? words.Skip(1).ToArray() : [];
 
+            var executed = false;
+
             foreach (var command in Commands)
             {
                 if (!command.CommandMatches(commandText)) continue;
+                executed = true;
                 command.Execute(args);
+                break;
             }
+
+            if (!executed) Console.WriteLine($"Command \"{commandText}\" not found.");
         }
     }
 
-    // public static void Main(string[] _)
-    // {
-    //     string line;
-    //     while ((line = Console.ReadLine()) != null)
-    //     {
-    //         var words = line.Split(' ');
-    //         if (words.Length < 1) continue;
-    //         var command = words[0];
-    //         var args = words.Skip(1).ToArray();
-    //
-    //         switch (command)
-    //         {
-    //             case "au":
-    //             case "add_user":
-    //                 AddUser(args);
-    //                 break;
-    //         }
-    //     }
-    // }
-
-    public static void AddUser(string[] args)
+    public void DisplayHelp()
     {
-        if (args.Length < 3)
+        foreach (var command in Commands)
         {
-            Console.WriteLine("Arguments missing!");
-            Console.WriteLine("Usage: [type] [firstName] [lastName]");
+            command.Print();
+            Console.WriteLine();
         }
-
-        var type = args[0];
-        var firstName = args[1];
-        var lastName = args[2];
-
-        var user = UserFactory.CreateUser(firstName, lastName, type);
-
-        if (user is null)
-        {
-            Console.WriteLine("Failed to create user!");
-            return;
-        }
-
-        UserService.Instance.Add(user);
-        Console.WriteLine("User created!");
-        Console.WriteLine(user);
     }
 }
