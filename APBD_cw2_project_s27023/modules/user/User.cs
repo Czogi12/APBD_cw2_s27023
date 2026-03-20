@@ -4,7 +4,7 @@ namespace APBD_cw2_project_s27023.modules.user;
 
 public abstract class User : Identifiable
 {
-    private static long _maxId = 1;
+    private static long _maxId;
 
     protected User(long id, string firstName, string lastName) : base(id)
     {

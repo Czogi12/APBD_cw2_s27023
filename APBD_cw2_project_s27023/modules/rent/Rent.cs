@@ -4,12 +4,14 @@ using APBD_cw2_project_s27023.modules.equipment;
 
 namespace APBD_cw2_project_s27023.modules.rent;
 
-public class Rent
+public class Rent : Identifiable
 {
+    private static long _maxId;
+
     private DateTime? _realEnd;
     public bool IsPaidOff = false;
 
-    public Rent(Equipment equipment, DateTime startDate, DateTime plannedEndDate)
+    public Rent(long id, Equipment equipment, DateTime startDate, DateTime plannedEndDate) : base(id)
     {
         if (startDate > plannedEndDate)
             throw new ArgumentException("Start date cannot be after planned date and end date");
@@ -17,9 +19,12 @@ public class Rent
         Start = startDate;
         End = plannedEndDate;
         Equipment = equipment;
+
+        if (id > _maxId) _maxId = id;
     }
 
-    public Rent(Equipment equipment, DateTime plannedEndDate) : this(equipment, DateTime.Now, plannedEndDate)
+    public Rent(Equipment equipment, DateTime plannedEndDate) : this(GetNextId(), equipment, DateTime.Now,
+        plannedEndDate)
     {
     }
 
@@ -74,5 +79,10 @@ public class Rent
     public float GetPrice()
     {
         return GetPriceMultiplier() * GetRentHours() * GetHourlyPrice();
+    }
+
+    public static long GetNextId()
+    {
+        return _maxId + 1;
     }
 }
