@@ -4,7 +4,7 @@ namespace APBD_cw2_project_s27023.modules.user;
 
 public class StudentUser(long id, string firstName, string lastName) : User(id, firstName, lastName)
 {
-    public override UserType Type => UserType.STUDENT;
+    public override UserType Type => UserType.Student;
 
     public override int GetMaxRentNumber()
     {
