@@ -3,8 +3,8 @@ using APBD_cw2_project_s27023.enums;
 
 namespace APBD_cw2_project_s27023.modules.equipment;
 
-public class LaserPointerEquipment(long id, bool isRented, Color color, float rangeInMeters)
-    : Equipment(id, "LAS-" + id, isRented)
+public class LaserPointerEquipment(long id, Color color, float rangeInMeters)
+    : Equipment(id, "LAS-" + id)
 {
     public override PowerSource PowerSource => PowerSource.BATTERIES;
     public override EquipmentType Type => EquipmentType.LaserPointer;
