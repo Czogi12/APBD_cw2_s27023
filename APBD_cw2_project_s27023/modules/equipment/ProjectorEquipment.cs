@@ -6,7 +6,7 @@ public class ProjectorEquipment(long id, bool isRented, int lumenBrightness, flo
     : Equipment(id, "PRO-" + id, isRented)
 {
     public override PowerSource PowerSource => PowerSource.SOCKET;
-    public override EquipmentType Type => EquipmentType.PROJECTOR;
+    public override EquipmentType Type => EquipmentType.Projector;
 
     public int LumenBrightness { get; } = lumenBrightness;
     public float ThrowDistanceMeters { get; } = throwDistanceMeters;

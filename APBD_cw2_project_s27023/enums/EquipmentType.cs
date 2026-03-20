@@ -2,7 +2,7 @@
 
 public enum EquipmentType
 {
-    LAPTOP,
-    LASER_POINTER,
-    PROJECTOR
+    Laptop,
+    LaserPointer,
+    Projector
 }

@@ -17,6 +17,7 @@ public class Cli
         Commands.Add(new HelpCommand(this));
         Commands.Add(new ClearCommand());
         Commands.Add(new AddUserCommand());
+        Commands.Add(new AddEquipmentCommand());
     }
 
     private void InitiateScanner()

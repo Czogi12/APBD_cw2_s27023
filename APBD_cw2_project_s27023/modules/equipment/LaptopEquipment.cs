@@ -10,7 +10,7 @@ public class LaptopEquipment(
     : Equipment(id, "LAP-" + id, isRented)
 {
     public override PowerSource PowerSource => PowerSource.MIXED;
-    public override EquipmentType Type => EquipmentType.LAPTOP;
+    public override EquipmentType Type => EquipmentType.Laptop;
 
     public float ScreenSizeInches { get; } = screenSizeInches;
     public float BatteryWattHours { get; } = batteryWattHours;

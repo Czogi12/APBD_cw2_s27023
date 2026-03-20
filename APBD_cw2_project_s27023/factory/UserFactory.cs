@@ -11,7 +11,7 @@ public class UserFactory
         // Posted by Paweł Bejger
         // Retrieved 2026-03-20, License - CC BY-SA 3.0
         UserType? userType = (UserType)Enum.Parse(typeof(UserType), type);
-        
+
         return userType switch
         {
             UserType.Student => new StudentUser(User.GetNextId(), firstName, lastName),

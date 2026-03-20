@@ -7,7 +7,7 @@ public class LaserPointerEquipment(long id, bool isRented, Color color, float ra
     : Equipment(id, "LAS-" + id, isRented)
 {
     public override PowerSource PowerSource => PowerSource.BATTERIES;
-    public override EquipmentType Type => EquipmentType.LASER_POINTER;
+    public override EquipmentType Type => EquipmentType.LaserPointer;
 
     public Color Color { get; } = color;
 

@@ -64,9 +64,9 @@ public class Rent
     {
         return Equipment.Type switch
         {
-            EquipmentType.LAPTOP => 40,
-            EquipmentType.LASER_POINTER => 2,
-            EquipmentType.PROJECTOR => 20,
+            EquipmentType.Laptop => 40,
+            EquipmentType.LaserPointer => 2,
+            EquipmentType.Projector => 20,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
