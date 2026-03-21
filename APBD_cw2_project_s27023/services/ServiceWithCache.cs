@@ -1,6 +1,6 @@
 ﻿namespace APBD_cw2_project_s27023.services;
 
-public abstract class ServiceWithCache<T, TE> : IService<T, TE>
+public abstract class ServiceWithCache<T, TE> : IService<T, TE> where T : notnull
 {
     private Dictionary<T, TE> Cache { get; } = new();
 

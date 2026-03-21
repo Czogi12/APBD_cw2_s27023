@@ -5,7 +5,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class AddUserCommand() : Command(["add-user", "au"],
+public class AddUserCommand(UserService userService) : Command(["add-user", "au"],
     [
         new StringArgument("type", true,
             $"({string.Join("|", Enum.GetNames(typeof(UserType)).Select(name => name.ToLower()))})"),
@@ -17,7 +17,7 @@ public class AddUserCommand() : Command(["add-user", "au"],
     protected override void ExecuteCommand(string[] args)
     {
         var user = UserFactory.CreateUser(args[0], args[1], args[2])!;
-        UserService.Instance.Add(user);
+        userService.Add(user);
         Console.WriteLine($"Successfully added user: {user}");
     }
 }

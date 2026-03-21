@@ -4,8 +4,6 @@ namespace APBD_cw2_project_s27023.services;
 
 public class UserService : ServiceWithCache<long, User>
 {
-    public static UserService Instance { get; } = new();
-
     public void Add(User user)
     {
         Add(user.Id, user);

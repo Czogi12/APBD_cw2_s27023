@@ -1,11 +1,19 @@
 ﻿using APBD_cw2_project_s27023.cli.commands;
+using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli;
 
 public class Cli
 {
-    public Cli()
+    private readonly EquipmentService equipmentService;
+    private readonly RentService rentService;
+    private readonly UserService userService;
+
+    public Cli(UserService userService, EquipmentService equipmentService, RentService rentService)
     {
+        this.userService = userService;
+        this.equipmentService = equipmentService;
+        this.rentService = rentService;
         InitiateCommands();
         InitiateScanner();
     }
@@ -17,12 +25,12 @@ public class Cli
         var help = new HelpCommand(this);
         Commands.Add(help);
         Commands.Add(new ClearCommand());
-        Commands.Add(new AddUserCommand());
+        Commands.Add(new AddUserCommand(userService));
         Commands.Add(new AddEquipmentCommand());
         Commands.Add(new ShowUsersCommand());
         Commands.Add(new ShowEquipmentCommand());
         Commands.Add(new RentEquipmentCommand());
-        Commands.Add(new ReturnEquipmentCommand());
+        Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService));
 
         help.Execute([]);
     }

@@ -6,7 +6,14 @@ namespace APBD_cw2_project_s27023.services;
 
 public class RentService : ServiceWithCache<long, Rent>
 {
-    public static RentService Instance { get; } = new();
+    public RentService(UserService userService, EquipmentService equipmentService)
+    {
+        UserService = userService;
+        EquipmentService = equipmentService;
+    }
+
+    private UserService UserService { get; }
+    private EquipmentService EquipmentService { get; }
 
     public Rent? FindActiveRentByEquipment(Equipment equipment)
     {
@@ -25,7 +32,7 @@ public class RentService : ServiceWithCache<long, Rent>
 
     public List<Equipment> FindAllAvailableEquipment()
     {
-        return EquipmentService.Instance.GetAll()
+        return EquipmentService.GetAll()
             .FindAll(e => !IsEquipmentRented(e));
     }
 
@@ -41,12 +48,12 @@ public class RentService : ServiceWithCache<long, Rent>
 
     public void RentEquipment(long equipmentId, long userId, int hours)
     {
-        var user = UserService.Instance.Get(userId);
+        var user = UserService.Get(userId);
 
         if (user is null) throw new ArgumentException("User not found.");
         if (!UserIsUnderRentingLimit(user)) throw new ArgumentException("User exceeds renting limits.");
 
-        var equipment = EquipmentService.Instance.Get(equipmentId);
+        var equipment = EquipmentService.Get(equipmentId);
 
         if (equipment is null) throw new ArgumentException("Equipment not found.");
         if (IsEquipmentRented(equipment)) throw new ArgumentException("Equipment is already rented.");
@@ -57,13 +64,13 @@ public class RentService : ServiceWithCache<long, Rent>
 
     public Rent ReturnEquipment(long equipmentId, long userId)
     {
-        var equipment = EquipmentService.Instance.Get(equipmentId);
+        var equipment = EquipmentService.Get(equipmentId);
 
         if (equipment is null) throw new ArgumentException("Equipment not found.");
         if (!IsEquipmentRented(equipment))
             throw new ArgumentException($"{equipment} is not rented thus cannot be returned.");
 
-        var user = UserService.Instance.Get(userId);
+        var user = UserService.Get(userId);
 
         if (user is null) throw new ArgumentException("User not found.");
         var rent = FindActiveRentByEquipment(equipment);
