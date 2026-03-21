@@ -1,6 +1,7 @@
 using APBD_cw2_project_s27023.enums;
 using APBD_cw2_project_s27023.exceptions;
 using APBD_cw2_project_s27023.modules.equipment;
+using APBD_cw2_project_s27023.modules.user;
 
 namespace APBD_cw2_project_s27023.modules.rent;
 
@@ -11,7 +12,7 @@ public class Rent : Identifiable
     private DateTime? _realEnd;
     public bool IsPaidOff = false;
 
-    public Rent(long id, Equipment equipment, DateTime startDate, DateTime plannedEndDate) : base(id)
+    public Rent(long id, Equipment equipment, User user, DateTime startDate, DateTime plannedEndDate) : base(id)
     {
         if (startDate > plannedEndDate)
             throw new ArgumentException("Start date cannot be after planned date and end date");
@@ -19,16 +20,19 @@ public class Rent : Identifiable
         Start = startDate;
         End = plannedEndDate;
         Equipment = equipment;
+        User = user;
 
         if (id > _maxId) _maxId = id;
     }
 
-    public Rent(Equipment equipment, DateTime plannedEndDate) : this(GetNextId(), equipment, DateTime.Now,
+    public Rent(Equipment equipment, User user, DateTime plannedEndDate) : this(GetNextId(), equipment, user,
+        DateTime.Now,
         plannedEndDate)
     {
     }
 
     public Equipment Equipment { get; }
+    public User User { get; }
     public DateTime Start { get; }
     public DateTime End { get; }
 
