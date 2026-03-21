@@ -23,6 +23,12 @@ public class RentService : ServiceWithCache<long, Rent>
         return FindRentsOfUser(user).FindAll(rent => rent.IsRented());
     }
 
+    public List<Equipment> FindAllAvailableEquipment()
+    {
+        return EquipmentService.Instance.GetAll()
+            .FindAll(e => !IsEquipmentRented(e));
+    }
+
     public bool IsEquipmentRented(Equipment equipment)
     {
         return FindActiveRentByEquipment(equipment) is not null;
