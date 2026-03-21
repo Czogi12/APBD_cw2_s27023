@@ -55,10 +55,25 @@ public class RentService : ServiceWithCache<long, Rent>
         Add(rent.Id, rent);
     }
 
-    public void ReturnEquipment(Equipment equipment)
+    public Rent ReturnEquipment(long equipmentId, long userId)
     {
+        var equipment = EquipmentService.Instance.Get(equipmentId);
+
+        if (equipment is null) throw new ArgumentException("Equipment not found.");
+        if (!IsEquipmentRented(equipment))
+            throw new ArgumentException($"{equipment} is not rented thus cannot be returned.");
+
+        var user = UserService.Instance.Get(userId);
+
+        if (user is null) throw new ArgumentException("User not found.");
         var rent = FindActiveRentByEquipment(equipment);
-        if (rent is not null) rent.RealEnd = DateTime.Now;
+        // should never be called
+        if (rent is null) throw new ArgumentException("Rent not found.");
+        if (FindActiveRentByEquipment(equipment)!.User != user)
+            throw new ArgumentException($"{user} has not rented {equipment}.");
+
+        rent.RealEnd = DateTime.Now;
+        return rent;
     }
 
     public void PayOffRent(Rent rent)

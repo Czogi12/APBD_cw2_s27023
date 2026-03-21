@@ -22,6 +22,7 @@ public class Cli
         Commands.Add(new ShowUsersCommand());
         Commands.Add(new ShowEquipmentCommand());
         Commands.Add(new RentEquipmentCommand());
+        Commands.Add(new ReturnEquipmentCommand());
 
         help.Execute([]);
     }
