@@ -13,18 +13,20 @@ public class RentEquipmentCommand() : Command(["rent-equipment", "re", "rent", "
 {
     protected override void ExecuteCommand(string[] args)
     {
-        var user = UserService.Instance.Get(long.Parse(args[0]));
-
-        if (user is null)
+        try
         {
-            Console.WriteLine("User not found.");
-            return;
+            var userId = long.Parse(args[0]);
+            var equipmentId = long.Parse(args[1]);
+            RentService.Instance.RentEquipment(
+                userId, equipmentId,
+                int.Parse(args[2])
+            );
+            Console.WriteLine(
+                $"{UserService.Instance.Get(userId)} successfully rented {EquipmentService.Instance.Get(equipmentId)}.");
         }
-
-        var equipment = EquipmentService.Instance.Get(long.Parse(args[1]));
-
-        if (equipment is null) Console.WriteLine("Equipment not found.");
-
-        // TODO: implement the rest after implementing IsRented method in RentService      
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 }

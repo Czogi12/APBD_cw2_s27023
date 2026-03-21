@@ -34,8 +34,23 @@ public class RentService : ServiceWithCache<long, Rent>
         return FindActiveRentByEquipment(equipment) is not null;
     }
 
-    public void RentEquipment(Equipment equipment, User user, int hours)
+    public bool UserIsUnderRentingLimit(User user)
     {
+        return FindRentsOfUser(user).Count < user.GetMaxRentNumber();
+    }
+
+    public void RentEquipment(long equipmentId, long userId, int hours)
+    {
+        var user = UserService.Instance.Get(userId);
+
+        if (user is null) throw new ArgumentException("User not found.");
+        if (!UserIsUnderRentingLimit(user)) throw new ArgumentException("User exceeds renting limits.");
+
+        var equipment = EquipmentService.Instance.Get(equipmentId);
+
+        if (equipment is null) throw new ArgumentException("Equipment not found.");
+        if (IsEquipmentRented(equipment)) throw new ArgumentException("Equipment is already rented.");
+
         var rent = new Rent(equipment, user, DateTime.Now.AddHours(hours));
         Add(rent.Id, rent);
     }
