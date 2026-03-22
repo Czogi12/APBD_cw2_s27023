@@ -59,7 +59,7 @@ public class Rent : Quotable
         return (int)(Start - RealEnd.Value).TotalHours + 1;
     }
 
-    private bool WasHeldTooLong()
+    public bool WasHeldTooLong()
     {
         return !IsRented() && End < RealEnd;
     }
