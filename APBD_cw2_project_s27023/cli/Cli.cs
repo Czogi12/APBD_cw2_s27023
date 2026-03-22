@@ -18,6 +18,7 @@ public class Cli
         this.rentService = rentService;
         this.availabilityService = availabilityService;
         InitiateCommands();
+        Commands.Find(command => command.CommandMatches("help"))?.Execute([]);
         InitiateScanner();
     }
 
@@ -25,17 +26,16 @@ public class Cli
 
     private void InitiateCommands()
     {
-        var help = new HelpCommand(this);
-        Commands.Add(help);
+        Commands.Add(new HelpCommand(this));
         Commands.Add(new ClearCommand());
         Commands.Add(new AddUserCommand(userService));
-        Commands.Add(new AddEquipmentCommand(equipmentService));
+        Commands.Add(new AddLaptopCommand(equipmentService));
+        Commands.Add(new AddPointerCommand(equipmentService));
+        Commands.Add(new AddProjectorCommand(equipmentService));
         Commands.Add(new ShowUsersCommand(userService));
         Commands.Add(new ShowEquipmentCommand(equipmentService, availabilityService));
         Commands.Add(new RentEquipmentCommand(rentService));
         Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService));
-
-        help.Execute([]);
     }
 
     private void InitiateScanner()
