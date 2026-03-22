@@ -33,8 +33,8 @@ public class Rent : Quotable
 
     public Equipment Equipment { get; }
     public User User { get; }
-    public DateTime Start { get; }
-    public DateTime End { get; }
+    private DateTime Start { get; }
+    private DateTime End { get; }
 
     public DateTime? RealEnd
     {
@@ -74,7 +74,7 @@ public class Rent : Quotable
         return GetPriceMultiplier() * GetRentHours() * Equipment.GetHourlyPrice();
     }
 
-    public static long GetNextId()
+    private static long GetNextId()
     {
         return _maxId + 1;
     }
