@@ -56,7 +56,7 @@ public class Rent : Quotable
     {
         if (RealEnd is null) throw new RentNotEndedException();
 
-        return (int)(Start - RealEnd.Value).TotalHours;
+        return (int)(Start - RealEnd.Value).TotalHours + 1;
     }
 
     private bool WasHeldTooLong()
