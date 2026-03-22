@@ -79,7 +79,7 @@ public class RentService(IUserService userService, IEquipmentService equipmentSe
 
     public bool UserIsUnderRentingLimit(User user)
     {
-        return FindRentsOfUser(user).Count < user.GetMaxRentNumber();
+        return FindActiveRentsOfUser(user).Count < user.GetMaxRentNumber();
     }
 
     public void PayOffRent(Rent rent)
