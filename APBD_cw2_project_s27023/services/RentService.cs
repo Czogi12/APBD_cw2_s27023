@@ -10,13 +10,9 @@ public class RentService(IUserService userService, IEquipmentService equipmentSe
     public void RentEquipment(long equipmentId, long userId, int hours)
     {
         var user = userService.Get(userId);
-
-        if (user is null) throw new ArgumentException("User not found.");
         if (!UserIsUnderRentingLimit(user)) throw new ArgumentException("User exceeds renting limits.");
 
         var equipment = equipmentService.Get(equipmentId);
-
-        if (equipment is null) throw new ArgumentException("Equipment not found.");
         if (IsEquipmentRented(equipment)) throw new ArgumentException("Equipment is already rented.");
 
         var rent = new Rent(equipment, user, DateTime.Now.AddHours(hours));
@@ -27,17 +23,14 @@ public class RentService(IUserService userService, IEquipmentService equipmentSe
     {
         var equipment = equipmentService.Get(equipmentId);
 
-        if (equipment is null) throw new ArgumentException("Equipment not found.");
         if (!IsEquipmentRented(equipment))
             throw new ArgumentException($"{equipment} is not rented thus cannot be returned.");
 
         var user = userService.Get(userId);
 
-        if (user is null) throw new ArgumentException("User not found.");
         var rent = FindActiveRentByEquipment(equipment);
-        // should never be called
-        if (rent is null) throw new ArgumentException("Rent not found.");
-        if (FindActiveRentByEquipment(equipment)!.User != user)
+
+        if (rent?.User != user)
             throw new ArgumentException($"{user} has not rented {equipment}.");
 
         rent.RealEnd = DateTime.Now;
@@ -47,6 +40,12 @@ public class RentService(IUserService userService, IEquipmentService equipmentSe
     public Rent? FindActiveRentByEquipment(Equipment equipment)
     {
         return GetAll().FirstOrDefault(r => r.Equipment == equipment && r.IsRented());
+    }
+
+    public override Rent Get(long id)
+    {
+        var rent = GetOrDefault(id);
+        return rent ?? throw new ArgumentException("Rent not found.");
     }
 
     public List<Rent> FindRentsOfUser(User user)

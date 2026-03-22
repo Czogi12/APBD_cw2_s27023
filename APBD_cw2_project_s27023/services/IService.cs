@@ -4,7 +4,9 @@ namespace APBD_cw2_project_s27023.services;
 
 public interface IService<T, TE> where TE : Identifiable<T>
 {
-    TE? Get(T id);
+    TE? GetOrDefault(T id);
+
+    TE Get(T id);
 
     void Add(TE data);
 

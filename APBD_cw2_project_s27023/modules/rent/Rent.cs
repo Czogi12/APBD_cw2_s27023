@@ -6,6 +6,8 @@ namespace APBD_cw2_project_s27023.modules.rent;
 
 public class Rent : Identifiable<long>
 {
+    private static readonly float RENT_OVERDUE_PENALTY = 1.2f;
+
     private static long _maxId;
 
     private DateTime? _realEnd;
@@ -65,7 +67,7 @@ public class Rent : Identifiable<long>
 
     private float GetPriceMultiplier()
     {
-        return WasHeldTooLong() ? 1.2f : 1f;
+        return WasHeldTooLong() ? RENT_OVERDUE_PENALTY : 1f;
     }
 
     public float GetPrice()

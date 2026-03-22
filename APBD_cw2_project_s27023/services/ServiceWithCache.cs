@@ -6,10 +6,12 @@ public abstract class ServiceWithCache<T, TE> : IService<T, TE> where TE : Ident
 {
     private Dictionary<T, TE> Cache { get; } = new();
 
-    public TE? Get(T id)
+    public TE? GetOrDefault(T id)
     {
         return Cache.ContainsKey(id) ? Cache[id] : default;
     }
+
+    public abstract TE Get(T id);
 
     public void Add(TE data)
     {
