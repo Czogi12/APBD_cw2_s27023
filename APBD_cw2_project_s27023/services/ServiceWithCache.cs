@@ -28,4 +28,9 @@ public abstract class ServiceWithCache<T, TE> : IService<T, TE> where TE : Ident
     {
         return Cache.Values.ToList();
     }
+
+    public int Count()
+    {
+        return Cache.Count;
+    }
 }

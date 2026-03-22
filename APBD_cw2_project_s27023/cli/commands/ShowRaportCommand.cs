@@ -1,4 +1,5 @@
 ﻿using APBD_cw2_project_s27023.enums;
+using APBD_cw2_project_s27023.services;
 using APBD_cw2_project_s27023.services.availability;
 using APBD_cw2_project_s27023.services.equipment;
 using APBD_cw2_project_s27023.services.rent;
@@ -10,14 +11,16 @@ public class ShowRaportCommand(IUserService userService, IEquipmentService equip
 {
     protected override void ExecuteCommand(string[] args)
     {
-        Console.WriteLine($"Users: {userService.Count()}");
-        foreach (var type in  Enum.GetValues<UserType>()) {
-            Console.WriteLine($"\t{type.ToString()}: {userService.Count(type)}");
-        }
-        
-        Console.WriteLine($"Equipment: {equipmentService.Count()}");
-        foreach (var type in  Enum.GetValues<EquipmentType>()) {
-            Console.WriteLine($"\t{type.ToString()}: {userService.Count(type)}");
+        PrintCountableService("Users", userService);
+        PrintCountableService("Equipment", equipmentService);
+    }
+    
+    private static void PrintCountableService<T>(string mainName, ICountableService<T> countableService) where T : struct, Enum
+    {
+        Console.WriteLine($"{mainName}: {countableService.Count()}");
+        foreach (var type in Enum.GetValues<T>())
+        {
+            Console.WriteLine($"\t{type}: {countableService.Count(type)}");
         }
     }
 }

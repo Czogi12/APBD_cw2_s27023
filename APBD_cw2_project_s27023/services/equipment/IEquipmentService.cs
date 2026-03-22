@@ -1,7 +1,8 @@
-﻿using APBD_cw2_project_s27023.modules.equipment;
+﻿using APBD_cw2_project_s27023.enums;
+using APBD_cw2_project_s27023.modules.equipment;
 
 namespace APBD_cw2_project_s27023.services.equipment;
 
-public interface IEquipmentService : IService<long, Equipment>
+public interface IEquipmentService : IService<long, Equipment>, ICountableService<EquipmentType>
 {
 }
