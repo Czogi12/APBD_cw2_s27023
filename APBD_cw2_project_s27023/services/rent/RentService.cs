@@ -1,8 +1,10 @@
 ﻿using APBD_cw2_project_s27023.modules.equipment;
 using APBD_cw2_project_s27023.modules.quotable.rent;
 using APBD_cw2_project_s27023.modules.user;
+using APBD_cw2_project_s27023.services.equipment;
+using APBD_cw2_project_s27023.services.user;
 
-namespace APBD_cw2_project_s27023.services;
+namespace APBD_cw2_project_s27023.services.rent;
 
 public class RentService(IUserService userService, IEquipmentService equipmentService)
     : ServiceWithCache<long, Rent>, IRentService

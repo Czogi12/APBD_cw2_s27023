@@ -1,6 +1,7 @@
 ﻿using APBD_cw2_project_s27023.cli.commands.arguments;
 using APBD_cw2_project_s27023.factory;
 using APBD_cw2_project_s27023.services;
+using APBD_cw2_project_s27023.services.equipment;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 

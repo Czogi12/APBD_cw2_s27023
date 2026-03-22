@@ -1,5 +1,6 @@
 ﻿using APBD_cw2_project_s27023.cli.commands.arguments;
 using APBD_cw2_project_s27023.services;
+using APBD_cw2_project_s27023.services.user;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 

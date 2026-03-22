@@ -1,6 +1,6 @@
 ﻿using APBD_cw2_project_s27023.modules.equipment;
 
-namespace APBD_cw2_project_s27023.services;
+namespace APBD_cw2_project_s27023.services.equipment;
 
 public class EquipmentService : ServiceWithCache<long, Equipment>, IEquipmentService
 {
