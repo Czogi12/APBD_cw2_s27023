@@ -3,7 +3,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class RemoveUserCommand() : Command(["remove-user", "ru"],
+public class RemoveUserCommand(UserService userService) : Command(["remove-user", "ru"],
     [
         new IntArgument("id", true, null, null)
     ],
@@ -11,6 +11,6 @@ public class RemoveUserCommand() : Command(["remove-user", "ru"],
 {
     protected override void ExecuteCommand(string[] args)
     {
-        UserService.Instance.Delete(int.Parse(args[0]));
+        userService.Delete(int.Parse(args[0]));
     }
 }

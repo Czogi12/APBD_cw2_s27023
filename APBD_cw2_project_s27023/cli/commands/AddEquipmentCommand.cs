@@ -7,7 +7,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
+public class AddEquipmentCommand(EquipmentService equipmentService) : Command(["add-equipment", "ae"],
     [
         new StringArgument("type", true,
             $"({string.Join("|", Enum.GetNames(typeof(EquipmentType)).Select(name => name.ToLower()))})")
@@ -58,18 +58,18 @@ public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
         switch (equipmentType)
         {
             case EquipmentType.Laptop:
-                EquipmentService.Instance.Add(new LaptopEquipment(id,
+                equipmentService.Add(new LaptopEquipment(id,
                     float.Parse(dataArgs[0], CultureInfo.InvariantCulture),
                     float.Parse(dataArgs[1], CultureInfo.InvariantCulture)));
                 break;
             case EquipmentType.LaserPointer:
                 var color = Color.FromArgb(int.Parse(dataArgs[0]), int.Parse(dataArgs[1]), int.Parse(dataArgs[2]));
-                EquipmentService.Instance.Add(new LaserPointerEquipment(id, color,
+                equipmentService.Add(new LaserPointerEquipment(id, color,
                     float.Parse(dataArgs[3], CultureInfo.InvariantCulture)
                 ));
                 break;
             case EquipmentType.Projector:
-                EquipmentService.Instance.Add(new ProjectorEquipment(id,
+                equipmentService.Add(new ProjectorEquipment(id,
                     int.Parse(dataArgs[0]), float.Parse(dataArgs[1], CultureInfo.InvariantCulture)
                 ));
                 break;
@@ -77,7 +77,7 @@ public class AddEquipmentCommand() : Command(["add-equipment", "ae"],
                 throw new NotImplementedException($"EquipmentType {args[0]} creation not implemented!");
         }
 
-        var obj = EquipmentService.Instance.Get(id);
+        var obj = equipmentService.Get(id);
         Console.WriteLine($"Successfully added {obj}");
     }
 }

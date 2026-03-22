@@ -3,7 +3,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class RentEquipmentCommand() : Command(["rent-equipment", "re", "rent", "r"],
+public class RentEquipmentCommand(RentService rentService) : Command(["rent-equipment", "re", "rent", "r"],
     [
         new LongArgument("user", true, null, null),
         new LongArgument("equipment", true, null, null),
@@ -17,12 +17,12 @@ public class RentEquipmentCommand() : Command(["rent-equipment", "re", "rent", "
         {
             var userId = long.Parse(args[0]);
             var equipmentId = long.Parse(args[1]);
-            RentService.Instance.RentEquipment(
+            rentService.RentEquipment(
                 userId, equipmentId,
                 int.Parse(args[2])
             );
             Console.WriteLine(
-                $"{UserService.Instance.Get(userId)} successfully rented {EquipmentService.Instance.Get(equipmentId)}.");
+                $"{rentService.Get(userId)} successfully rented {rentService.Get(equipmentId)}.");
         }
         catch (Exception e)
         {

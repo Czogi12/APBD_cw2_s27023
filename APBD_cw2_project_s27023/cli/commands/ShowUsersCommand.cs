@@ -2,10 +2,10 @@
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class ShowUsersCommand() : Command(["show-users", "su"], [], "Displays all users")
+public class ShowUsersCommand(UserService userService) : Command(["show-users", "su"], [], "Displays all users")
 {
     protected override void ExecuteCommand(string[] args)
     {
-        foreach (var user in UserService.Instance.GetAll()) Console.WriteLine(user);
+        foreach (var user in userService.GetAll()) Console.WriteLine(user);
     }
 }

@@ -26,10 +26,10 @@ public class Cli
         Commands.Add(help);
         Commands.Add(new ClearCommand());
         Commands.Add(new AddUserCommand(userService));
-        Commands.Add(new AddEquipmentCommand());
-        Commands.Add(new ShowUsersCommand());
-        Commands.Add(new ShowEquipmentCommand());
-        Commands.Add(new RentEquipmentCommand());
+        Commands.Add(new AddEquipmentCommand(equipmentService));
+        Commands.Add(new ShowUsersCommand(userService));
+        Commands.Add(new ShowEquipmentCommand(rentService, equipmentService));
+        Commands.Add(new RentEquipmentCommand(rentService));
         Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService));
 
         help.Execute([]);
