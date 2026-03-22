@@ -40,25 +40,17 @@ public class Cli
 
     private void InitiateScanner()
     {
-        string? line;
-        while ((line = Console.ReadLine()) != null)
+        while (Console.ReadLine() is { } line)
         {
             var words = line.Split(' ');
             if (words.Length < 1) continue;
             var commandText = words[0];
             var args = words.Length > 1 ? words.Skip(1).ToArray() : [];
 
-            var executed = false;
+            var command = Commands.FirstOrDefault(command => command.CommandMatches(commandText));
 
-            foreach (var command in Commands)
-            {
-                if (!command.CommandMatches(commandText)) continue;
-                executed = true;
-                command.Execute(args);
-                break;
-            }
-
-            if (!executed) Console.WriteLine($"Command \"{commandText}\" not found.");
+            if (command is null) Console.WriteLine($"Command \"{commandText}\" not found.");
+            else command.Execute(args);
         }
     }
 
