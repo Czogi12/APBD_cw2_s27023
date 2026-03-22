@@ -2,16 +2,15 @@ using APBD_cw2_project_s27023.exceptions;
 using APBD_cw2_project_s27023.modules.equipment;
 using APBD_cw2_project_s27023.modules.user;
 
-namespace APBD_cw2_project_s27023.modules.rent;
+namespace APBD_cw2_project_s27023.modules.quotable.rent;
 
-public class Rent : Identifiable<long>
+public class Rent : Quotable
 {
-    private static readonly float RENT_OVERDUE_PENALTY = 1.2f;
+    private static readonly float RentOverduePenalty = 1.2f;
 
     private static long _maxId;
 
     private DateTime? _realEnd;
-    public bool IsPaidOff = false;
 
     public Rent(long id, Equipment equipment, User user, DateTime startDate, DateTime plannedEndDate) : base(id)
     {
@@ -67,10 +66,10 @@ public class Rent : Identifiable<long>
 
     private float GetPriceMultiplier()
     {
-        return WasHeldTooLong() ? RENT_OVERDUE_PENALTY : 1f;
+        return WasHeldTooLong() ? RentOverduePenalty : 1f;
     }
 
-    public float GetPrice()
+    public override float GetPrice()
     {
         return GetPriceMultiplier() * GetRentHours() * Equipment.GetHourlyPrice();
     }

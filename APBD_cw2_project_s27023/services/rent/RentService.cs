@@ -1,5 +1,5 @@
 ﻿using APBD_cw2_project_s27023.modules.equipment;
-using APBD_cw2_project_s27023.modules.rent;
+using APBD_cw2_project_s27023.modules.quotable.rent;
 using APBD_cw2_project_s27023.modules.user;
 
 namespace APBD_cw2_project_s27023.services;
