@@ -20,6 +20,8 @@ public abstract class Equipment : Identifiable
 
     public abstract EquipmentType Type { get; }
 
+    public abstract float GetHourlyPrice();
+
     public static long GetNextId()
     {
         return _maxId + 1;

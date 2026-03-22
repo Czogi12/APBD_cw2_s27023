@@ -11,6 +11,11 @@ public class ProjectorEquipment(long id, int lumenBrightness, float throwDistanc
     public int LumenBrightness { get; } = lumenBrightness;
     public float ThrowDistanceMeters { get; } = throwDistanceMeters;
 
+    public override float GetHourlyPrice()
+    {
+        return 10.0f;
+    }
+
     public override string ToString()
     {
         return

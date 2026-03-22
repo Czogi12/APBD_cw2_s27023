@@ -14,6 +14,11 @@ public class LaptopEquipment(
     public float ScreenSizeInches { get; } = screenSizeInches;
     public float BatteryWattHours { get; } = batteryWattHours;
 
+    public override float GetHourlyPrice()
+    {
+        return 30.0f;
+    }
+
     public override string ToString()
     {
         return

@@ -1,4 +1,3 @@
-using APBD_cw2_project_s27023.enums;
 using APBD_cw2_project_s27023.exceptions;
 using APBD_cw2_project_s27023.modules.equipment;
 using APBD_cw2_project_s27023.modules.user;
@@ -69,20 +68,9 @@ public class Rent : Identifiable
         return WasHeldTooLong() ? 1.2f : 1f;
     }
 
-    private float GetHourlyPrice()
-    {
-        return Equipment.Type switch
-        {
-            EquipmentType.Laptop => 40,
-            EquipmentType.LaserPointer => 2,
-            EquipmentType.Projector => 20,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-    }
-
     public float GetPrice()
     {
-        return GetPriceMultiplier() * GetRentHours() * GetHourlyPrice();
+        return GetPriceMultiplier() * GetRentHours() * Equipment.GetHourlyPrice();
     }
 
     public static long GetNextId()
