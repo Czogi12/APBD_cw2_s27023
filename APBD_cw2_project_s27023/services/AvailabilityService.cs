@@ -6,6 +6,7 @@ public class AvailabilityService(IRentService rentService) : IAvailabilityServic
 {
     public bool IsAvailable(Equipment equipment)
     {
+        // TODO: add Servicing/Broken status
         return rentService.FindActiveRentByEquipment(equipment) is null;
     }
 }
