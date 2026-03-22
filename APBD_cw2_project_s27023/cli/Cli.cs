@@ -1,8 +1,8 @@
 ﻿using APBD_cw2_project_s27023.cli.commands;
-using APBD_cw2_project_s27023.services;
 using APBD_cw2_project_s27023.services.availability;
 using APBD_cw2_project_s27023.services.equipment;
 using APBD_cw2_project_s27023.services.rent;
+using APBD_cw2_project_s27023.services.servicing;
 using APBD_cw2_project_s27023.services.user;
 
 namespace APBD_cw2_project_s27023.cli;
@@ -12,15 +12,17 @@ public class Cli
     private readonly IAvailabilityService availabilityService;
     private readonly IEquipmentService equipmentService;
     private readonly IRentService rentService;
+    private readonly IServicingService servicingService;
     private readonly IUserService userService;
 
     public Cli(IUserService userService, IEquipmentService equipmentService, IRentService rentService,
-        IAvailabilityService availabilityService)
+        IAvailabilityService availabilityService, IServicingService servicingService)
     {
         this.userService = userService;
         this.equipmentService = equipmentService;
         this.rentService = rentService;
         this.availabilityService = availabilityService;
+        this.servicingService = servicingService;
         InitiateCommands();
         Commands.Find(command => command.CommandMatches("help"))?.Execute([]);
         InitiateScanner();
@@ -39,7 +41,7 @@ public class Cli
         Commands.Add(new ShowUsersCommand(userService));
         Commands.Add(new ShowEquipmentCommand(equipmentService, availabilityService));
         Commands.Add(new RentEquipmentCommand(rentService));
-        Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService));
+        Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService, servicingService));
     }
 
     private void InitiateScanner()

@@ -6,7 +6,7 @@ public abstract class Command(string[] variants, ICommandArgument[] arguments, s
 {
     private string CommandName => Variants[0];
     private string[] Variants { get; } = variants;
-    private ICommandArgument[] Arguments { get; } = arguments;
+    protected ICommandArgument[] Arguments { get; } = arguments;
     private string HelpText { get; } = helpText;
 
     public bool CommandMatches(string command)
@@ -25,6 +25,7 @@ public abstract class Command(string[] variants, ICommandArgument[] arguments, s
 
         for (var i = 0; i < args.Length; i++)
         {
+            if (i >= Arguments.Length) break;
             var argumentValidator = Arguments[i];
             if (!argumentValidator.IsValid(args[i]))
             {
