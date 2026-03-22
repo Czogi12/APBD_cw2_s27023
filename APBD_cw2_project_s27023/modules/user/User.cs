@@ -2,7 +2,7 @@ using APBD_cw2_project_s27023.enums;
 
 namespace APBD_cw2_project_s27023.modules.user;
 
-public abstract class User : Identifiable
+public abstract class User : Identifiable<long>
 {
     private static long _maxId;
 

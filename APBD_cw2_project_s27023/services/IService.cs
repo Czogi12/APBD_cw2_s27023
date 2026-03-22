@@ -1,10 +1,12 @@
-﻿namespace APBD_cw2_project_s27023.services;
+﻿using APBD_cw2_project_s27023.modules;
 
-public interface IService<T, TE> where T : notnull
+namespace APBD_cw2_project_s27023.services;
+
+public interface IService<T, TE> where TE : Identifiable<T>
 {
     TE? Get(T id);
 
-    void Add(T id, TE data);
+    void Add(TE data);
 
     void Delete(T id);
 

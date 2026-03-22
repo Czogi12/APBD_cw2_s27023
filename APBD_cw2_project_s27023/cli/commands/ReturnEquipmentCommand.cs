@@ -3,7 +3,10 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class ReturnEquipmentCommand(UserService userService, EquipmentService equipmentService, RentService rentService)
+public class ReturnEquipmentCommand(
+    IUserService userService,
+    IEquipmentService equipmentService,
+    IRentService rentService)
     : Command(
         ["return-equipment", "return"],
         [

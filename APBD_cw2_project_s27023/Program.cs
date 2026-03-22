@@ -10,7 +10,9 @@ public class Program
         var userService = new UserService();
         var equipmentService = new EquipmentService();
         var rentService = new RentService(userService, equipmentService);
+        var availabilityService = new AvailabilityService(rentService);
 
-        if (args.Any(arg => arg == "--console")) new Cli(userService, equipmentService, rentService);
+        if (args.Any(arg => arg == "--console"))
+            new Cli(userService, equipmentService, rentService, availabilityService);
     }
 }

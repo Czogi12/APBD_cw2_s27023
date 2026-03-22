@@ -3,7 +3,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class RentEquipmentCommand(RentService rentService) : Command(["rent-equipment", "re", "rent", "r"],
+public class RentEquipmentCommand(IRentService rentService) : Command(["rent-equipment", "re", "rent", "r"],
     [
         new LongArgument("user", true, null, null),
         new LongArgument("equipment", true, null, null),

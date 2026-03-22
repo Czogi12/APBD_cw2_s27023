@@ -5,15 +5,18 @@ namespace APBD_cw2_project_s27023.cli;
 
 public class Cli
 {
-    private readonly EquipmentService equipmentService;
-    private readonly RentService rentService;
-    private readonly UserService userService;
+    private readonly IAvailabilityService availabilityService;
+    private readonly IEquipmentService equipmentService;
+    private readonly IRentService rentService;
+    private readonly IUserService userService;
 
-    public Cli(UserService userService, EquipmentService equipmentService, RentService rentService)
+    public Cli(IUserService userService, IEquipmentService equipmentService, IRentService rentService,
+        IAvailabilityService availabilityService)
     {
         this.userService = userService;
         this.equipmentService = equipmentService;
         this.rentService = rentService;
+        this.availabilityService = availabilityService;
         InitiateCommands();
         InitiateScanner();
     }
@@ -28,7 +31,7 @@ public class Cli
         Commands.Add(new AddUserCommand(userService));
         Commands.Add(new AddEquipmentCommand(equipmentService));
         Commands.Add(new ShowUsersCommand(userService));
-        Commands.Add(new ShowEquipmentCommand(rentService, equipmentService));
+        Commands.Add(new ShowEquipmentCommand(equipmentService, availabilityService));
         Commands.Add(new RentEquipmentCommand(rentService));
         Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService));
 

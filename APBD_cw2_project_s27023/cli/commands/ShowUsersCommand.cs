@@ -2,7 +2,7 @@
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class ShowUsersCommand(UserService userService) : Command(["show-users", "su"], [], "Displays all users")
+public class ShowUsersCommand(IUserService userService) : Command(["show-users", "su"], [], "Displays all users")
 {
     protected override void ExecuteCommand(string[] args)
     {

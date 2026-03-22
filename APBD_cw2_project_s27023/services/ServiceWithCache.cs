@@ -1,6 +1,8 @@
-﻿namespace APBD_cw2_project_s27023.services;
+﻿using APBD_cw2_project_s27023.modules;
 
-public abstract class ServiceWithCache<T, TE> : IService<T, TE> where T : notnull
+namespace APBD_cw2_project_s27023.services;
+
+public abstract class ServiceWithCache<T, TE> : IService<T, TE> where TE : Identifiable<T>
 {
     private Dictionary<T, TE> Cache { get; } = new();
 
@@ -9,11 +11,10 @@ public abstract class ServiceWithCache<T, TE> : IService<T, TE> where T : notnul
         return Cache.ContainsKey(id) ? Cache[id] : default;
     }
 
-    public void Add(T id, TE data)
+    public void Add(TE data)
     {
-        if (Cache.ContainsKey(id) || Cache.ContainsValue(data)) return;
-
-        Cache.Add(id, data);
+        if (Cache.ContainsKey(data.Id) || Cache.ContainsValue(data)) return;
+        Cache.Add(data.Id, data);
     }
 
     public void Delete(T id)

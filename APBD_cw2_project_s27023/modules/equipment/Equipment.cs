@@ -2,7 +2,7 @@ using APBD_cw2_project_s27023.enums;
 
 namespace APBD_cw2_project_s27023.modules.equipment;
 
-public abstract class Equipment : Identifiable
+public abstract class Equipment : Identifiable<long>
 {
     private static long _maxId;
 

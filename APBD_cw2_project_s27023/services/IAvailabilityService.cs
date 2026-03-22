@@ -2,6 +2,7 @@
 
 namespace APBD_cw2_project_s27023.services;
 
-public class EquipmentService : ServiceWithCache<long, Equipment>, IEquipmentService
+public interface IAvailabilityService
 {
+    bool IsAvailable(Equipment equipment);
 }

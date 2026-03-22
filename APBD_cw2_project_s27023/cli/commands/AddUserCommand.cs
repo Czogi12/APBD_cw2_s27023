@@ -5,7 +5,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class AddUserCommand(UserService userService) : Command(["add-user", "au"],
+public class AddUserCommand(IUserService userService) : Command(["add-user", "au"],
     [
         new StringArgument("type", true,
             $"({string.Join("|", Enum.GetNames(typeof(UserType)).Select(name => name.ToLower()))})"),

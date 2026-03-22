@@ -3,18 +3,18 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class ShowEquipmentCommand(RentService rentService, EquipmentService equipmentService) : Command(
-    ["show-equipment", "se"], [
-        new StringArgument("mode", true, "(all|avalible)")
-    ], "Displays equipment")
+public class ShowEquipmentCommand(IEquipmentService equipmentService, IAvailabilityService availabilityService)
+    : Command(
+        ["show-equipment", "se"], [
+            new StringArgument("mode", true, "(all|available)")
+        ], "Displays equipment")
 {
     protected override void ExecuteCommand(string[] args)
     {
-        if (args[0] == "all")
-            foreach (var eq in equipmentService.GetAll())
+        foreach (var eq in equipmentService.GetAll())
+            if (args[0] == "all")
                 Console.WriteLine(eq);
-        else
-            foreach (var eq in rentService.FindAllAvailableEquipment())
+            else if (args[0] == "available" && availabilityService.IsAvailable(eq))
                 Console.WriteLine(eq);
     }
 }

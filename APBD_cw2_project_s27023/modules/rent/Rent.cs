@@ -4,7 +4,7 @@ using APBD_cw2_project_s27023.modules.user;
 
 namespace APBD_cw2_project_s27023.modules.rent;
 
-public class Rent : Identifiable
+public class Rent : Identifiable<long>
 {
     private static long _maxId;
 

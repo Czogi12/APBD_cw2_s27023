@@ -7,7 +7,7 @@ using APBD_cw2_project_s27023.services;
 
 namespace APBD_cw2_project_s27023.cli.commands;
 
-public class AddEquipmentCommand(EquipmentService equipmentService) : Command(["add-equipment", "ae"],
+public class AddEquipmentCommand(IEquipmentService equipmentService) : Command(["add-equipment", "ae"],
     [
         new StringArgument("type", true,
             $"({string.Join("|", Enum.GetNames(typeof(EquipmentType)).Select(name => name.ToLower()))})")
