@@ -34,7 +34,7 @@ public class Rent : Quotable
     public Equipment Equipment { get; }
     public User User { get; }
     private DateTime Start { get; }
-    private DateTime End { get; }
+    public DateTime End { get; }
 
     public DateTime? RealEnd
     {

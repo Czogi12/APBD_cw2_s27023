@@ -60,6 +60,12 @@ public class RentService(IUserService userService, IEquipmentService equipmentSe
         return FindRentsOfUser(user).FindAll(rent => rent.IsRented());
     }
 
+    public List<Rent> GetAllStale()
+    {
+        var now = DateTime.Now;
+        return GetAll().FindAll(rent => rent.IsRented() && rent.End < now);
+    }
+
     public List<Equipment> FindAllAvailableEquipment()
     {
         return equipmentService.GetAll()
