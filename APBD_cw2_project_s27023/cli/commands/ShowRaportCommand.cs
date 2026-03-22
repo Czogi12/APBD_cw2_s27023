@@ -10,7 +10,7 @@ using APBD_cw2_project_s27023.services.user;
 namespace APBD_cw2_project_s27023.cli.commands;
 
 public class ShowRaportCommand(IUserService userService, IEquipmentService equipmentService, IRentService rentService,
-    IAvailabilityService availabilityService, ServicingService servicingService) : Command(["show-raport" ,"raport"], [
+    IAvailabilityService availabilityService, IServicingService servicingService) : Command(["show-raport" ,"raport"], [
 new StringArgument("type", false, "(count|stale|earnings)")
 ], "Displays raport")
 {
@@ -24,8 +24,8 @@ new StringArgument("type", false, "(count|stale|earnings)")
                 PrintCountableService("Users", userService);
                 PrintCountableService("Equipment", equipmentService);
                 
-                Console.WriteLine($"Available equipment: {equipmentService.GetAll().FindAll(availabilityService.IsAvailable)}");
-                Console.WriteLine($"Unavailable equipment: {equipmentService.GetAll().FindAll(eq => !availabilityService.IsAvailable(eq))}");
+                Console.WriteLine($"Available equipment: {equipmentService.GetAll().FindAll(availabilityService.IsAvailable).Count}");
+                Console.WriteLine($"Unavailable equipment: {equipmentService.GetAll().FindAll(eq => !availabilityService.IsAvailable(eq)).Count}");
                 
                 Console.WriteLine($"Rents: {rentService.GetAll().Count}");
                 Console.WriteLine($"\tActive: {rentService.GetAll().FindAll(rent => rent.IsRented()).Count}");

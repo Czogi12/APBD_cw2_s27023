@@ -44,7 +44,7 @@ public class Cli
         Commands.Add(new ReturnEquipmentCommand(userService, equipmentService, rentService, servicingService));
         Commands.Add(new ShowUsersRentsCommand(userService, rentService));
         Commands.Add(new ShowStaleRentsCommand(rentService));
-        Commands.Add(new ShowRaportCommand(userService, equipmentService ,rentService, availabilityService));
+        Commands.Add(new ShowRaportCommand(userService, equipmentService ,rentService, availabilityService, servicingService));
         
     }
 
