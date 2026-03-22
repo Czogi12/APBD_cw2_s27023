@@ -6,7 +6,7 @@ namespace APBD_cw2_project_s27023.modules.quotable.rent;
 
 public class Rent : Quotable
 {
-    private static readonly float RentOverduePenalty = 1.2f;
+    private static readonly float RentOverduePenalty = .2f;
 
     private static long _maxId;
 
@@ -64,14 +64,16 @@ public class Rent : Quotable
         return !IsRented() && End < RealEnd;
     }
 
-    private float GetPriceMultiplier()
+    private float GetPenaltyPrice()
     {
-        return WasHeldTooLong() ? RentOverduePenalty : 1f;
+        if (WasHeldTooLong()) return GetRentHours() * RentOverduePenalty;
+
+        return 0;
     }
 
     public override float GetPrice()
     {
-        return GetPriceMultiplier() * GetRentHours() * Equipment.GetHourlyPrice();
+        return GetPenaltyPrice() + GetRentHours() * Equipment.GetHourlyPrice();
     }
 
     private static long GetNextId()
