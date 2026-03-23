@@ -1,4 +1,5 @@
-﻿using APBD_cw2_project_s27023.exceptions;
+﻿using System.Text.Json.Serialization;
+using APBD_cw2_project_s27023.exceptions;
 using APBD_cw2_project_s27023.modules.quotable.rent;
 
 namespace APBD_cw2_project_s27023.modules.quotable.servicing;
@@ -10,6 +11,7 @@ public class Servicing : Quotable
 {
     private static long _maxId = 0;
 
+    [JsonConstructor]
     public Servicing(long id, string description, Rent rent) : base(id)
     {
         if (_maxId < id) _maxId = id;

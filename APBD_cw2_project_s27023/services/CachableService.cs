@@ -2,7 +2,7 @@
 
 namespace APBD_cw2_project_s27023.services;
 
-public abstract class ServiceWithCache<T, TE> : IService<T, TE> where TE : Identifiable<T>
+public abstract class CachableService<T, TE> : IService<T, TE> where TE : Identifiable<T>
 {
     private Dictionary<T, TE> Cache { get; } = new();
 
@@ -13,13 +13,13 @@ public abstract class ServiceWithCache<T, TE> : IService<T, TE> where TE : Ident
 
     public abstract TE Get(T id);
 
-    public void Add(TE data)
+    public virtual void Add(TE data)
     {
         if (Cache.ContainsKey(data.Id) || Cache.ContainsValue(data)) return;
         Cache.Add(data.Id, data);
     }
 
-    public void Delete(T id)
+    public virtual void Delete(T id)
     {
         Cache.Remove(id);
     }

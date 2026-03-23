@@ -1,7 +1,11 @@
+using System.Text.Json.Serialization;
 using APBD_cw2_project_s27023.enums;
 
 namespace APBD_cw2_project_s27023.modules.equipment;
 
+[JsonDerivedType(typeof(LaptopEquipment), "laptop")]
+[JsonDerivedType(typeof(LaserPointerEquipment), "laser")]
+[JsonDerivedType(typeof(ProjectorEquipment), "projector")]
 public abstract class Equipment : Identifiable<long>
 {
     private static long _maxId;

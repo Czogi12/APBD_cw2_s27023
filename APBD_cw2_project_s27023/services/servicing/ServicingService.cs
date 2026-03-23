@@ -4,7 +4,7 @@ using APBD_cw2_project_s27023.modules.user;
 
 namespace APBD_cw2_project_s27023.services.servicing;
 
-public class ServicingService : ServiceWithCache<long, Servicing>, IServicingService
+public class ServicingService() : PersistableCachableService<long, Servicing>("servicing"), IServicingService
 {
     public override Servicing Get(long id)
     {
@@ -19,6 +19,6 @@ public class ServicingService : ServiceWithCache<long, Servicing>, IServicingSer
 
     public Servicing? FindActiveServicingOfEquipment(Equipment equipment)
     {
-        return GetAll().Find(servicing => !servicing.IsServiced() && servicing.Rent.Equipment == equipment);
+        return GetAll().Find(servicing => servicing.IsServiced() && servicing.Rent.Equipment.Id == equipment.Id);
     }
 }

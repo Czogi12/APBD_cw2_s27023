@@ -1,7 +1,10 @@
+using System.Text.Json.Serialization;
 using APBD_cw2_project_s27023.enums;
 
 namespace APBD_cw2_project_s27023.modules.user;
 
+[JsonDerivedType(typeof(StudentUser), "student")]
+[JsonDerivedType(typeof(EmployeeUser), "employee")]
 public abstract class User : Identifiable<long>
 {
     private static long _maxId;

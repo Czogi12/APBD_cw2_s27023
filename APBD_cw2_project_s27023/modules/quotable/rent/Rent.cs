@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using APBD_cw2_project_s27023.exceptions;
 using APBD_cw2_project_s27023.modules.equipment;
 using APBD_cw2_project_s27023.modules.user;
@@ -12,13 +13,14 @@ public class Rent : Quotable
 
     private DateTime? _realEnd;
 
-    public Rent(long id, Equipment equipment, User user, DateTime startDate, DateTime plannedEndDate) : base(id)
+    [JsonConstructor]
+    public Rent(long id, Equipment equipment, User user, DateTime start, DateTime end) : base(id)
     {
-        if (startDate > plannedEndDate)
+        if (start > end)
             throw new ArgumentException("Start date cannot be after planned date and end date");
 
-        Start = startDate;
-        End = plannedEndDate;
+        Start = start;
+        End = end;
         Equipment = equipment;
         User = user;
 
@@ -33,7 +35,7 @@ public class Rent : Quotable
 
     public Equipment Equipment { get; }
     public User User { get; }
-    private DateTime Start { get; set; }
+    public DateTime Start { get; set; }
     public DateTime End { get; set; }
 
     public DateTime? RealEnd

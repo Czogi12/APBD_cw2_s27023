@@ -7,7 +7,7 @@ using APBD_cw2_project_s27023.services.user;
 namespace APBD_cw2_project_s27023.services.rent;
 
 public class RentService(IUserService userService, IEquipmentService equipmentService)
-    : ServiceWithCache<long, Rent>, IRentService
+    : PersistableCachableService<long, Rent>("rent"), IRentService
 {
     public void RentEquipment(long equipmentId, long userId, int hours)
     {
