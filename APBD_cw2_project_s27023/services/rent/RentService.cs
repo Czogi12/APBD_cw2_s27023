@@ -21,7 +21,7 @@ public class RentService(IUserService userService, IEquipmentService equipmentSe
         Add(rent);
     }
 
-    public Rent ReturnEquipment(long equipmentId, long userId)
+    public Rent ReturnEquipment(long userId, long equipmentId)
     {
         var equipment = equipmentService.Get(equipmentId);
 
