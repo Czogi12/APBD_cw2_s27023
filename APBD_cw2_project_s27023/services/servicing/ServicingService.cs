@@ -19,6 +19,6 @@ public class ServicingService() : PersistableCachableService<long, Servicing>("s
 
     public Servicing? FindActiveServicingOfEquipment(Equipment equipment)
     {
-        return GetAll().Find(servicing => servicing.IsServiced() && servicing.Rent.Equipment.Id == equipment.Id);
+        return GetAll().Find(servicing => !servicing.IsServiced() && servicing.Rent.Equipment.Id == equipment.Id);
     }
 }
