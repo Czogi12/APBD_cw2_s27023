@@ -18,6 +18,6 @@ public static class Program
         var availabilityService = new AvailabilityService(rentService, servicingService);
 
         if (args.Any(arg => arg == "--console"))
-            new Cli(userService, equipmentService, rentService, availabilityService, servicingService);
+            new Cli(userService, equipmentService, rentService, availabilityService, servicingService, args.Any(arg => arg == "--test"));
     }
 }

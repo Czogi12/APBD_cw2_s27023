@@ -33,8 +33,8 @@ public class Rent : Quotable
 
     public Equipment Equipment { get; }
     public User User { get; }
-    private DateTime Start { get; }
-    public DateTime End { get; }
+    private DateTime Start { get; set; }
+    public DateTime End { get; set; }
 
     public DateTime? RealEnd
     {
@@ -66,7 +66,7 @@ public class Rent : Quotable
 
     private float GetPenaltyPrice()
     {
-        if (WasHeldTooLong()) return GetRentHours() * RentOverduePenalty;
+        if (WasHeldTooLong()) return GetRentHours() * RentOverduePenalty * Equipment.GetHourlyPrice();
 
         return 0;
     }
@@ -79,5 +79,11 @@ public class Rent : Quotable
     private static long GetNextId()
     {
         return _maxId + 1;
+    }
+
+    public void FalsifyLateRentForTest()
+    {
+        End = Start;
+        Start = Start.Subtract(TimeSpan.FromHours(1));
     }
 }

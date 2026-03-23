@@ -16,7 +16,7 @@ public class Cli
     private readonly IUserService userService;
 
     public Cli(IUserService userService, IEquipmentService equipmentService, IRentService rentService,
-        IAvailabilityService availabilityService, IServicingService servicingService)
+        IAvailabilityService availabilityService, IServicingService servicingService, bool executeTests)
     {
         this.userService = userService;
         this.equipmentService = equipmentService;
@@ -25,6 +25,36 @@ public class Cli
         this.servicingService = servicingService;
         InitiateCommands();
         Commands.Find(command => command.CommandMatches("help"))?.Execute([]);
+
+        if (executeTests)
+        {
+            // Adding equipment
+            Commands.Find(command => command.CommandMatches("add-laptop"))?.Execute(["100", "200"]);
+            Commands.Find(command => command.CommandMatches("add-projector"))?.Execute(["100", "200"]);
+            Commands.Find(command => command.CommandMatches("add-pointer"))?.Execute(["0", "0", "255", "10"]);
+            
+            // Adding users
+            Commands.Find(command => command.CommandMatches("au"))?.Execute(["student", "Asd", "Dsa"]);
+            Commands.Find(command => command.CommandMatches("au"))?.Execute(["employee", "Fgh", "Hgf"]);
+            
+            // Rent equipment
+            Commands.Find(command => command.CommandMatches("rent"))?.Execute(["1", "1", "10"]);
+            // Rent same equipment
+            Commands.Find(command => command.CommandMatches("rent"))?.Execute(["1", "1", "10"]);
+            // Returning   
+            Commands.Find(command => command.CommandMatches("return"))?.Execute(["1", "1"]);
+            
+            // Rent again
+            Commands.Find(command => command.CommandMatches("rent"))?.Execute(["1", "1", "10"]);
+            var rent = rentService.FindActiveRentByEquipment(equipmentService.Get(1));
+            rent?.FalsifyLateRentForTest();
+            Commands.Find(command => command.CommandMatches("return"))?.Execute(["1", "1"]);
+            
+            Commands.Find(command => command.CommandMatches("raport"))?.Execute(["count"]);
+            Commands.Find(command => command.CommandMatches("raport"))?.Execute(["stale"]);
+            Commands.Find(command => command.CommandMatches("raport"))?.Execute(["earnings"]);
+        }
+
         InitiateScanner();
     }
 

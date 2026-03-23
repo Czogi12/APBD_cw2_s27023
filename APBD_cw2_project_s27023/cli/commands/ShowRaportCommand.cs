@@ -32,6 +32,8 @@ new StringArgument("type", false, "(count|stale|earnings)")
                 Console.WriteLine($"\t\tStale: {rentService.GetAll().FindAll(rent => rent.IsRented() && rent.End < DateTime.Now).Count}");
                 Console.WriteLine($"\t\tNon-Stale: {rentService.GetAll().FindAll(rent => rent.IsRented() && rent.End >= DateTime.Now).Count}");
                 Console.WriteLine($"\tReturned: {rentService.GetAll().FindAll(rent => !rent.IsRented()).Count}");
+                Console.WriteLine($"\t\tStale: {rentService.GetAll().FindAll(rent => !rent.IsRented() && rent.WasHeldTooLong()).Count}");
+                Console.WriteLine($"\t\tNon-stale: {rentService.GetAll().FindAll(rent => !rent.IsRented() && !rent.WasHeldTooLong()).Count}");
                 
                 Console.WriteLine($"Services: {servicingService.GetAll().Count}");
                 Console.WriteLine($"\tDone: {servicingService.GetAll().FindAll(servicing => servicing.IsServiced()).Count}");

@@ -1,6 +1,11 @@
 # Uruchamianie
+### Standardowe
 ```shell
     dotnet run --console --project APBD_cw2_project_s27023
+```
+### Testowe komendy
+```shell
+    dotnet run --console --test --project APBD_cw2_project_s27023
 ```
 # Decyzje
 Inspiracje czerpię z architektury Spring boot.
