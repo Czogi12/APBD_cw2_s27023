@@ -8,11 +8,11 @@ namespace APBD_cw2_project_s27023.modules.quotable.servicing;
 // Equipment will be sent for servicing and after return available again for renting, and servicing price will be quoted to person who damaged it.
 public class Servicing : Quotable
 {
-    private static readonly long _maxId = 0;
+    private static long _maxId = 0;
 
     public Servicing(long id, string description, Rent rent) : base(id)
     {
-        if (_maxId < id) id = _maxId;
+        if (_maxId < id) _maxId = id;
         Description = description;
         Rent = rent;
     }
