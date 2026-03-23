@@ -23,7 +23,7 @@ public class RentEquipmentCommand(IRentService rentService) : Command(["rent-equ
                 int.Parse(args[2])
             );
             Console.WriteLine(
-                $"{rentService.GetOrDefault(userId)} successfully rented {rentService.GetOrDefault(equipmentId)}.");
+                $"Successfully rented equipment.");
         }
         catch (Exception e)
         {
