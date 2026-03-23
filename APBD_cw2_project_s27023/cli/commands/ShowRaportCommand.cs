@@ -29,12 +29,12 @@ new StringArgument("type", false, "(count|stale|earnings)")
                 
                 Console.WriteLine($"Rents: {rentService.GetAll().Count}");
                 Console.WriteLine($"\tActive: {rentService.GetAll().FindAll(rent => rent.IsRented()).Count}");
-                Console.WriteLine($"\t\tStale: {rentService.GetAll().FindAll(rent => rent.IsRented() && rent.WasHeldTooLong()).Count}");
-                Console.WriteLine($"\t\tNon-Stale: {rentService.GetAll().FindAll(rent => rent.IsRented() && !rent.WasHeldTooLong()).Count}");
+                Console.WriteLine($"\t\tStale: {rentService.GetAll().FindAll(rent => rent.IsRented() && rent.End < DateTime.Now).Count}");
+                Console.WriteLine($"\t\tNon-Stale: {rentService.GetAll().FindAll(rent => rent.IsRented() && rent.End >= DateTime.Now).Count}");
                 Console.WriteLine($"\tReturned: {rentService.GetAll().FindAll(rent => !rent.IsRented()).Count}");
                 
                 Console.WriteLine($"Services: {servicingService.GetAll().Count}");
-                Console.WriteLine($"\tDone: {servicingService.GetAll().FindAll(servicing => !servicing.IsServiced()).Count}");
+                Console.WriteLine($"\tDone: {servicingService.GetAll().FindAll(servicing => servicing.IsServiced()).Count}");
                 Console.WriteLine($"\tIn progress: {servicingService.GetAll().FindAll(servicing => !servicing.IsServiced()).Count}");
                 Console.WriteLine($"\t\tPaid-off: {servicingService.GetAll().FindAll(servicing => servicing.IsServiced() && servicing.IsPaidOff).Count}");
                 Console.WriteLine($"\t\tWaiting for payment: {servicingService.GetAll().FindAll(servicing => !servicing.IsServiced() && !servicing.IsPaidOff).Count}");
